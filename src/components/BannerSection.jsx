@@ -12,12 +12,12 @@ function BannerSection() {
     {
       image: banner1,
       subTitle: "Welcome To TenTwenty Farms",
-      title: "From our Farms to your hands"
+      title: "From our Farms <br/>to your hands"
     },
     {
       image: banner2,
-      subTitle: "New Farms",
-      title: "From new hands"
+      subTitle: "Welcome To TenTwenty Farms",
+      title: "From our Farms <br/>to your hands"
     }
   ]
 
@@ -36,7 +36,7 @@ function BannerSection() {
   })
 
   return (
-    <section className='relative overflow-hidden h-screen'>
+    <section className='relative overflow-hidden h-[812px] md:h-[900px] '>
         <>
         {/* Navigation bar */}
         <NavBar />
@@ -44,11 +44,11 @@ function BannerSection() {
         {/* Banner Area */}
 
         {/* slider */}
-        <div className='relative h-screen w-full aspect-video overflow-hidden'>
+        <div className='relative w-full h-[812px] md:h-[900px] aspect-video overflow-hidden'>
 
         {/* backroud iamge for remove glitch */}
         <div
-          className='absolute top-0 left-0 w-full h-full'
+          className='absolute top-0 left-0 w-full h-[812px] md:h-[900px]'
           style={{
             backgroundImage:`url(${slides[prevIndex]?.image?.src})`,
             backgroundSize: 'cover',
@@ -74,21 +74,32 @@ function BannerSection() {
               backgroundPosition : 'center'
             }}
             />
+            <div className='absolute top-[266px] left-[26px] md:top-[350px] md:left-[135px]'>
+              <div className='text-[#EEF4F9] text-[14px] md:text-base '>{slides[index]?.subTitle}</div>
+              <h1 className='text-[#EEF4F9] w-[348px] text-[46px] mt-1 md:text-[64px] hidden md:block md:w-[536px] capitalize md:mt-[22px]' style={{lineHeight: '4rem'}} dangerouslySetInnerHTML={{"__html": slides[index]?.title}} />
+              <h1 className='text-[#EEF4F9] w-[348px] text-[46px] mt-[12px] md:text-[64px] block md:hidden md:w-[536px] capitalize md:mt-[22px]' style={{lineHeight: '2.9rem'}} dangerouslySetInnerHTML={{"__html": slides[index]?.title}} />
+            </div>
           </motion.div>
         </AnimatePresence>
 
           {/* Thumbnail */}
-          <div className='absolute bottom-10 left-50'>
+          <div className='absolute flex top-[639px] left-[25px] md:top-[694px] md:left-[135px] justify-between'>
             <div 
-              className='w-30 h-30' 
+              className='flex w-[117px] h-[117px] md:w-[138px] md:h-[138px] border-1 border-[#EEF4F9] border-opacity-30 cursor-pointer' 
               onClick={ () => setIndex( (prev) => (prev +1) % slides.length ) }
             >
               <Image 
-                className='w-30 h-30 border-5 m-2 border-white'
-                src={slides[index+1]?.image}
+                className='border-2 border-white h-[116px] md:h-[138px] p-[14px]'
+                src={slides[slides.length-1 < index+1 ? 0 : index+1]?.image}
                 alt=''
               />
-              <p className='text-white absolute bottom-10 text-3xl left-8'>Next</p>
+              <p className='text-[#EEF4F9] absolute top-[44px] md:top-[56px] left-[43px] md:left-[51px] text-[14px] md:text-base '>Next</p>
+            </div>
+            {/* navigation */}
+            <div className='flex ml-[40px] md:ml-[33px] mt-[47px] md:mt-[58px]  text-[14px] md:text-base text-white'>
+              {index+1 < 9 ? `0${index+1}` : index+1 } 
+              <span className='border-1 border-white h-0 w-[103px] mx-[16px] my-[10px]'></span> 
+              {slides.length < 9 ? `0${slides.length}` : slides.length }
             </div>
           </div>
           </div>

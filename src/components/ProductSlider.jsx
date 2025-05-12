@@ -1,8 +1,14 @@
 "use client"
 import React, { useEffect, useRef, useState } from "react";
-import banner1 from "../assets/banner1.png";
-import banner2 from "../assets/banner2.png";
 import gsap from "gsap";
+
+import productslide1 from "../assets/productslide1.png";
+import productslide2 from "../assets/productslide2.png";
+import productslide3 from "../assets/productslide3.png";
+import productslide4 from "../assets/productslide1.png";
+import productslide5 from "../assets/productslide2.png";
+import productslide6 from "../assets/productslide3.png";
+import Image from "next/image";
 // import { Draggable } from "gsap/Draggable";
 // gsap.registerPlugin(Draggable);
 
@@ -10,32 +16,32 @@ function ProductSlider() {
     
   const products = [
     {
-      image: banner1,
+      image: productslide1,
       subTitle: "Client 1",
       title: "Dubai, United Arab Emirates",
     },
     {
-      image: banner2,
+      image: productslide2,
       subTitle: "Client 2",
       title: "Dubai, United Arab Emirates",
     },
     {
-      image: banner1,
+      image: productslide3,
       subTitle: "Client 3",
       title: "Dubai, United Arab Emirates",
     },
     {
-      image: banner2,
+      image: productslide4,
       subTitle: "Client 4",
       title: "Dubai, United Arab Emirates",
     },
     {
-      image: banner1,
+      image: productslide5,
       subTitle: "Client 5",
       title: "Dubai, United Arab Emirates",
     },
     {
-      image: banner2,
+      image: productslide6,
       subTitle: "Client 6",
       title: "Dubai, United Arab Emirates",
     },
@@ -137,11 +143,8 @@ function ProductSlider() {
 
   return (
     <>
-      <h2 className="text-[54px] pt-[148px] px-[490px]">Quality Products</h2>
-      <p className="text-[24px] leading-10 w-[750px] mx-auto my-0 py-10 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        labors aisi ut aliguip ex ea commodo cong isi qui squat.</p>
+      <h2 className="text-[56px] pt-[148px] px-[490px] tracking-tight">Quality Products</h2>
+      <p className="text-[24px] leading-7 w-[748px] mx-[336px] my-1 py-10 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       <div className="w-[1440px] px-12 h-300 overflow-x-hidden overflow-y-auto"
       ref={sectionRef}
       onMouseEnter={() => setIsHovered(true)}
@@ -151,12 +154,16 @@ function ProductSlider() {
         {products.map((src, i) => {
             
         let positionClass = '';
+        let titleClass = '';
         if (i === activeIndex) {
-            positionClass = 'mx-[5%] w[23.33%] gap-4';
+          positionClass = 'mx-[5%] w[23.33%] gap-4';
+          titleClass = 'visible'  
         } else if (i === activeIndex - 1) {
-            positionClass = '-rotate-9 mt-10';
+          positionClass = '-rotate-9 mt-10';
+          titleClass = 'invisible'  
         } else if (i === activeIndex + 1) {
-            positionClass = 'rotate-9 mt-10';
+          positionClass = 'rotate-9 mt-10';
+          titleClass = 'invisible'  
         }
         return (
           <div
@@ -164,13 +171,13 @@ function ProductSlider() {
             ref={(el) => (slideRefs.current[i] = el)}
             className={`w-[33.333%] text-center px-0 flex-shrink-0 transform transition-transform duration-300 ${positionClass}`}
           >
-            <img
-              src={src?.image?.src}
+            <Image
+              src={src?.image}
               className="w-[435px] h-[620px] mx-auto my-15"
               alt={`slide-${i}`}
             />
-            <div>{src?.subTitle}</div>
-            <div>{src?.title}</div>
+            <div className={`text-4xl ${titleClass}`} style={{lineHeight: '60px'}}>{src?.subTitle}</div>
+            <div className={`text-2xl p-[10px] ${titleClass}`}>{src?.title}</div>
           </div>
         )
         }
@@ -180,8 +187,8 @@ function ProductSlider() {
     {isHovered && (
         <div 
           ref={cursorRef}
-          className="fixed top-0 -left-0 w-20 h-20 rounded-full bg-white text-black flex items-center justify-center text-sm font-bold z-50 pointer-events-none filter invert cursor-none bg-opacity-5">
-          drag
+          className="fixed top-0 -left-0 w-[99px] h-[99px] rounded-full bg-black text-white flex items-center justify-center text-xl font-normal z-50 pointer-events-none filter invert cursor-none bg-opacity-5">
+          Drag
         </div>
       )}
     </>

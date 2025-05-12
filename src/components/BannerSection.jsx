@@ -26,7 +26,7 @@ function BannerSection() {
       setIndex( (prev) => (prev +1) % slides.length )
     } , 3000)
     return () => clearInterval(timer)
-  },index )
+  },[index] )
 
   useEffect( () => {
     const timer = setTimeout( () => {
